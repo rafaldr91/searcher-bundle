@@ -6,12 +6,22 @@ services:
     # fetching services directly from the container via $container->get() won't work.
     # The best practice is to be explicit about your dependencies anyway.
 
+  Vibbe\Searcher\Presenter\SearchResultPresenter: ~
+  vibbe.searcher.presenter.search_result_presenter:
+    class: Vibbe\Searcher\Presenter\SearchResultPresenter
+
+  Vibbe\Searcher\Presentation\DefaultResultDecorator: ~
+  vibbe.searcher.presentation.default_search_result_decorator:
+    class: Vibbe\Searcher\Presentation\DefaultResultDecorator
 
 
-  Vibbe\BaselinkerAPI\Contracts\BaselinkerServiceInterface:
-    class: Vibbe\BaselinkerAPI\Service\BaselinkerService
+  Vibbe\Searcher\Interfaces\SearcherServiceInterface:
+    class: Vibbe\Searcher\Service\SearcherService
 #
-#  vibbe.baslinker.service:
-#    class: '@Vibbe\BaselinkerAPI\Contracts\BaselinkerServiceInterface'
-#    arguments: ["@vibbe.baselinker.facade"]
+  vibbe.searcher.service:
+    class: '@Vibbe\Searcher\Interfaces\SearcherServiceInterface'
+    arguments: ["@doctrine.orm.entity_manager", "@vibbe.searcher.presenter.search_result_presente", "@vibbe.searcher.presentation.default_search_result_decorator"]
+#    calls:
+#      - [setResultDecorator, ['@=service(parameter("vibbe_notification_bundle.transport_processor"))']]
+
 
