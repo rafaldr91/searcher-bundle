@@ -5,7 +5,7 @@
  * Date: 26.01.2021
  */
 
-namespace Vibbe\Searcher\src\Builder\Condition;
+namespace Vibbe\Searcher\Builder\Condition;
 
 use Doctrine\ORM\QueryBuilder;
 use Vibbe\Searcher\Builder\Condition\ConditionBuilder;
